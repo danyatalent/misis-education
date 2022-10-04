@@ -25,16 +25,16 @@ int ternary_to_int(const std::string& s)
 }
 
 
-std::string tor(const std::string& a, const std::string& b) 
-{
-    std::string result = "";
-    for (int i = a.length() - 1; i >= 0; i--) {
-        int tmp = ((a[i] - '0') + (b[i] - '0')) % 3;
-        result.append(std::to_string(tmp));
-    }
-    std::reverse(result.begin(), result.end());
-    return result;
-}
+// std::string tor(const std::string& a, const std::string& b) 
+// {
+//     std::string result = "";
+//     for (int i = a.length() - 1; i >= 0; i--) {
+//         int tmp = ((a[i] - '0') + (b[i] - '0')) % 3;
+//         result.append(std::to_string(tmp));
+//     }
+//     std::reverse(result.begin(), result.end());
+//     return result;
+// }
 
 
 int main()
@@ -43,28 +43,34 @@ int main()
     int a(0), c(0), result(0);
     std::cin >> a >> c;
     bool answer = false;
-    std::string ternary_a = int_to_ternary(a);
-    // std::cout << test_a << std::endl;
-    // std::cout << ternary_to_int(test_a);
-    // std::reverse(ternary_a.begin(), ternary_a.end());
-    while (!answer) {
-        std::string ternary_number = int_to_ternary(result);
-        while (ternary_number.length() != ternary_a.length()) {
-            if (ternary_a.length() > ternary_number.length()) {
-                ternary_number.insert(0, 1, '0');
-            }
-            else {
-                ternary_a.insert(0, 1, '0');
-            }
-        }
-        // std::reverse(ternary_number.begin(), ternary_number.end());
-
-        if (tor(ternary_a, ternary_number) == int_to_ternary(c)) {
-            answer = true;
-        }
-        else {
-            result += 1;
+    std::string trn_a = int_to_ternary(a), trn_c = int_to_ternary(c), trn_b = "";
+    while (trn_a.length() != trn_c.length()) {
+        if (trn_a.length() > trn_c.length()) trn_c.insert(0, 1, '0');
+        else trn_a.insert(0, 1, '0');
+    }
+    for (int i = trn_a.length() - 1; i >= 0; i--) {
+        int tmp = (trn_c[i] - '0') - (trn_a[i] - '0');
+        switch (tmp)
+        {
+        case 1:
+            trn_b.append("1");
+            break;
+        case 2:
+            trn_b.append("2");
+            break;
+        case 0:
+            trn_b.append("0");
+            break;
+        case -1:
+            trn_b.append("2");
+            break;
+        case -2:
+            trn_b.append("1");
+        default:
+            break;
         }
     }
+    std::reverse(trn_b.begin(), trn_b.end());
+    result = ternary_to_int(trn_b);
     std::cout << result << std::endl;
 }
