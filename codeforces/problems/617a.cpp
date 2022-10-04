@@ -8,6 +8,6 @@ int main()
         steps += 1;
         a -= 5;
     }
-    std::cout << steps << std::endl;
+    std::cout << (a == 0 ? steps : ++steps) << std::endl;
     return 0;
 }
