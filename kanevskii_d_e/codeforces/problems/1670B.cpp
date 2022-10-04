@@ -6,6 +6,7 @@ const int MAX_CHAR = 26;
 
 int main()
 {
+    std::ios_base::sync_with_stdio(false);
     int t(0);
     std::cin >> t;
     while(t--){
