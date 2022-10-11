@@ -29,7 +29,7 @@ int main()
         member = s(x, 1);
         sum = member;
         i = 2;
-        while (std::abs(member) > epsilon) {
+        while (std::abs(member) > epsilon || i % 4 == 0) {
             member = s(x, i);
             sum += member;
             i++;
