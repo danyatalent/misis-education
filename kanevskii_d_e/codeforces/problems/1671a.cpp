@@ -3,15 +3,6 @@
 #include <cmath>
 
 
-bool is_prime(int& x)
-{
-    for (int i = 2; i < std::sqrt(x); i++) {
-        if (x % i == 0) return false;
-    }
-    return true;
-}
-
-
 void solve()
 {
     std::string s;
@@ -19,41 +10,14 @@ void solve()
     int curr_a(0), curr_b(0);
     bool answer = true;
 
-    s[0] == 'a' ? curr_a = 1 : curr_b = 1;
-
-    for (int i = 1; i < s.size(); i++) {
-        if (s[i] == 'a' && curr_b == 0) {
-            curr_a++;
+    for (int i = 0; i < s.size(); i++) {
+        if ((i == 0 || s[i] != s[i - 1]) && (i == s.size() - 1 || s[i] != s[i + 1])) {
+            std::cout << "no" << std::endl;
+            return;
         }
-        else if (s[i] == 'b' && curr_a == 0) {
-            curr_b++;
-        }
-        else if (s[i] == 'b' && curr_a != 0) {
-            if (!is_prime(curr_a)) {
-                std::cout << "no" << std::endl;
-                return;
-            } else {
-                curr_a = 0;
-                curr_b++;
-            }
-        }
-        else if (s[i] == 'a' && curr_b != 0) {
-            if (!is_prime(curr_b)) {
-                std::cout << "no" << std::endl;
-                return;
-            } else {
-                curr_b = 0;
-                curr_a++;
-            }
-        }
-
     }
-    if (curr_a > 0) {
-        std::cout << (is_prime(curr_a) ? "yes" : "No") << std::endl;
-    }
-    else if (curr_b > 0) {
-        std::cout << (is_prime(curr_b) ? "yes" : "No") << std::endl;
-    }
+    std::cout << "yes" << std::endl;
+    return;
 }
 
 
