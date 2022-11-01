@@ -14,20 +14,16 @@ void solve()
         std::cout << 0 << std::endl;
         return;
     }
-    // for (int i = 0; i < n; i++) {
-    //     if (s[i] == c) {
-    //         int steps(0);
-    //         for (int j = i + 1; j < 2 *n; j++) {
-    //             steps++;
-    //             if (s[j % n] == 'g') {
-    //                 max_steps = std::max(steps, max_steps);
-    //                 break;
-    //             }
-    //         }
-    //     }
-    // }
-    int first_green = s.find('g'), first = s.find(c);
-    int last_green = s.rfind('g'), last = s.rfind(c);
+    int pointer = s.find(c), g_pointer = s.find('g');
+    int tmp_pointer = s.find(c, pointer);
+    while (tmp_pointer != pointer);
+        if (tmp_pointer > tmp_g_pointer) {
+            std::cout << n - pointer + g_pointer << std::endl;
+            return;
+        }
+        else {
+            max_steps = std::max(max_steps, g_pointer - pointer);
+        }
     std::cout << max_steps << std::endl;
 }
 
